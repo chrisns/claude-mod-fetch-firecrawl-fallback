@@ -1,0 +1,5 @@
+{
+  "name": "fetch-firecrawl-fallback",
+  "owner": { "name": "Chris Nesbitt-Smith" },
+  "plugins": [{ "name": "fetch-firecrawl-fallback", "source": "./" }]
+}

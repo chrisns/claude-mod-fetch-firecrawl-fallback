@@ -1,0 +1,49 @@
+{
+  "name": "fetch-firecrawl-fallback",
+  "version": "0.1.0",
+  "description": "Makes WebFetch survive anti-bot walls: on a 403 or a challenge page it retries with the Firecrawl CLI, then Claude in Chrome, and the agent sees an ordinary WebFetch result.",
+  "userConfig": {
+    "firecrawl": {
+      "title": "Use the Firecrawl CLI",
+      "type": "boolean",
+      "default": true,
+      "description": "Second rung: `firecrawl scrape`. Needs the CLI installed and logged in (`firecrawl login`, or FIRECRAWL_API_KEY in the environment)."
+    },
+    "firecrawl_bin": {
+      "title": "Firecrawl CLI command",
+      "type": "string",
+      "default": "firecrawl",
+      "description": "Path or name of the firecrawl executable."
+    },
+    "chrome": {
+      "title": "Use Claude in Chrome as the last resort",
+      "type": "boolean",
+      "default": true,
+      "description": "Needs the Claude in Chrome extension connected. Runs in a throwaway tab that is closed afterwards."
+    },
+    "model": {
+      "title": "Model that applies the prompt",
+      "type": "string",
+      "default": "haiku",
+      "description": "WebFetch runs your prompt over the page with a small model. The fallback does the same with this one, outside the agent's context."
+    },
+    "max_chars": {
+      "title": "Page characters kept",
+      "type": "number",
+      "default": 100000,
+      "description": "A longer page is cut here and the result says how to continue with offset."
+    },
+    "challenge_wait_s": {
+      "title": "Chrome challenge wait (s)",
+      "type": "number",
+      "default": 12,
+      "description": "How long to let a 'checking your browser' interstitial clear in Chrome before giving up."
+    },
+    "skip_hosts": {
+      "title": "Hosts never sent to a third party",
+      "type": "string",
+      "default": "",
+      "description": "Comma-separated host suffixes (example.com) that skip Firecrawl. Private, local and credentialed URLs are always skipped."
+    }
+  }
+}
